@@ -92,7 +92,9 @@ module IRC
 		def self.setup_connections(bot, config)
 		  connections = {}
 			config.each do |network, server_setup|
-				connections[network] = IRC::Setup.new(bot, network, server_setup)
+			  unless network == "admins"
+				  connections[network] = IRC::Setup.new(bot, network, server_setup)
+			  end
 			end
 			return connections
 		end
