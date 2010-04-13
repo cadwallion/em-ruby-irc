@@ -35,7 +35,7 @@ module IRC
 			channel = connection.channels.select { |obj| obj.name == channel_name }.first
 			connection.channels.delete(channel) unless channel.nil?
 		end
-		
+
 		#Creates the user in the channel userlist (IRC::Channel#users) and then returns the user
 		def self.channel_user(connection, channel_name, user_name, hostmask=nil)
 		  return false if channel_name.nil? or user_name.nil?
@@ -49,7 +49,7 @@ module IRC
 			end
 			return user
 		end
-		
+
 		#Returns a user from an event.
 		def self.get_channel_user_from_event(event, user=nil)
 			if user.nil?
@@ -58,7 +58,7 @@ module IRC
 				channel_user(event.connection, event.channel, user)
 			end
 		end
-		
+
 		#Creates the user in the global userlist (IRC::Connection#users) and then returns the user
 		def self.global_user(connection, user_name, hostmask=nil)
 			user_name = sanitize_nickname(user_name)
@@ -70,7 +70,7 @@ module IRC
 			user.hostmask = hostmask unless hostmask.nil?
 			return user
 		end
-		
+
 		#Update the users hostmask
 		def self.update_hostname(connection, user_name, hostmask)
 			user_name = sanitize_nickname(user_name)
@@ -78,27 +78,25 @@ module IRC
 			user.hostmask = hostmask unless user.nil? or hostmask.nil?
 			return user
 		end
-		
+
 		def self.sanitize_nickname(nickname)
 			return nickname.downcase.chomp.match(/(?![\@\%\&\+])([\-\_\[\]\{\}\\\|\`\^a-zA-Z0-9]*)/)[0]
 		end
-		
+
 		#Converts a hostmask like *brian@*.google.com to .*brian@.*google.com so it can be properly used in a regex
 		def self.regex_mask(hostmask)
 			hostmask.gsub(/([\[\]\(\)\?\^\$])\\/, '\\1').gsub(/\./, '\.').gsub(/\[/, '\[').gsub(/\]/, '\]').gsub(/\*/, '.*').sub(/^/, '^').sub(/$/, '$')
 		end
-		
+
 		#Sets up all connections into global @@connections
 		def self.setup_connections(bot, config)
 		  connections = {}
-			config.each do |network, server_setup|
-			  unless network == "admins"
-				  connections[network] = IRC::Setup.new(bot, network, server_setup)
-			  end
+			config['networks'].each do |network, server_setup|
+			  connections[network] = IRC::Setup.new(bot, network, server_setup)
 			end
 			return connections
 		end
-		
+
 	  def self.add_handler(eventname, proc, network)
 		  network.add_startup_handler(lambda {|bot|
 			  bot.add_message_handler(eventname, proc)
@@ -106,3 +104,4 @@ module IRC
 	  end
 	end
 end
+
