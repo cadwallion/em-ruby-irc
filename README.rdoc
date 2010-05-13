@@ -1,8 +1,8 @@
-== REQUIREMENTS ==
+= REQUIREMENTS
 
 - eventmachine
 - yaml
 
-== DESCRIPTION ==
+= DESCRIPTION
 
 Under major development and major design changes.  Will be doing some major reworking, so stay tuned
