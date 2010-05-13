@@ -1,8 +1,4 @@
-= REQUIREMENTS
+= EM Ruby IRC Bot Framework
 
-- eventmachine
-- yaml
+== Description
 
-= DESCRIPTION
-
-Under major development and major design changes.  Will be doing some major reworking, so stay tuned
