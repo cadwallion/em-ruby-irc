@@ -16,6 +16,7 @@ spec = Gem::Specification.new do |s|
   s.files = %w(README.rdoc Rakefile) + Dir["{rdoc,spec,lib,examples}/**/*"]
   s.require_path = "lib"
 
+  s.add_dependency('eventmachine', '>= 0.12.8')
   s.add_development_dependency('rspec', '= 1.3.0')
 end
 
