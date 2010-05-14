@@ -1,14 +1,6 @@
 # This hash is used to store all of the connections, its the only global var set by the library
 @@connections = Hash.new
 
-require 'eventmachine'
-require 'core/lib/EM-Ruby-IRC/IRC-Connection.rb'
-require 'core/lib/EM-Ruby-IRC/IRC-Event.rb'
-require 'core/lib/EM-Ruby-IRC/IRC-User.rb'
-require 'core/lib/EM-Ruby-IRC/IRC-Channel.rb'
-require 'core/lib/EM-Ruby-IRC/IRC-Utils.rb'
-require 'core/lib/EM-Ruby-IRC/default-handlers.rb'
-
 #TODO: need to make setup actually allow multiple connections and to handle all of the EM stuff
 
 module IRC
